@@ -1,6 +1,6 @@
-# http-status-pages
+# HTTP error pages
 
-Serve custom error pages for 4xx client errors &amp; 5xx server errors.
+This was quickly hacked together so I could generate custom error pages for 4xx &amp; 5xx errors on NGINX web server (and others) and store them in a centralized location.
 
 ## How to use
 

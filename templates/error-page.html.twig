@@ -4,14 +4,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ status_code }} {{ status_message }}</title>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{{ code }} {{ reason }}</title>
+    <meta name="description" content="{{ description }}">
     <link rel="stylesheet" href="http-error-pages.css">
 </head>
 
 <body>
     <div id="main">
-        <div>{{ status_code }}</div>
-        <div class="txt">{{ status_message }}<span class="blink">_</span></div>
+        <div>{{ code }}</div>
+        <div class="txt">{{ reason }}<span class="blink">_</span></div>
     </div>
 </body>
 
