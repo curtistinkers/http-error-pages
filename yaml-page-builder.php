@@ -31,7 +31,7 @@ while ($http_status_codes->valid()) {
             $reason = $statuses->current()['reason'];
             $description = $statuses->current()['description'];
 
-            $filename = 'web/' . $code . '.html';
+            $filename = 'html/' . $code . '.html';
 
             // Display code and reason
             // echo $code . ' => ' . $reason . "\n";

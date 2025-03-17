@@ -8,7 +8,7 @@ use Twig\Loader\FilesystemLoader as TwigLoaderFilesystem;
 
 require 'vendor/autoload.php';
 
-$location_root = '/usr/local/share/http-error-pages/web';
+$location_root = '/usr/local/share/http-error-pages/html';
 
 // Set up Twig environment
 $loader = new TwigLoaderFilesystem('templates');
@@ -37,12 +37,6 @@ while ($http_status_codes->valid()) {
         if ($enabled) {
             $code = $statuses->key();
             $reason = $statuses->current()['reason'];
-            $description = $statuses->current()['description'];
-
-            $filename = 'web/' . $code . '.html';
-
-            // Display code and reason
-            // echo $code . ' => ' . $reason . "\n";
 
             // Prepare the data for the template
             $data = [
