@@ -7,7 +7,62 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>421 Misdirected Request</title>
     <meta name="description" content="The 421 (Misdirected Request) status code indicates that the request was directed at a server that is unable or unwilling to produce and uthoritative response for the target URI. An origin server (or gateway acting on behalf of the origin server) sends 421 to reject a target URI that does not match an origin for which the server has been configured (Section 4.3.1) or does not match the connection context over which the request was received (Section 7.4).">
-    <link rel="stylesheet" href="http-error-pages.css">
+    <style>
+        @import url("https://fonts.googleapis.com/css?family=Press+Start+2P");
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+}
+
+* {
+    font-family: 'Press Start 2P', cursive;
+    box-sizing: border-box;
+}
+
+#main {
+    padding: 1rem;
+    background: black;
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    color: #54FE55;
+    text-shadow: 0px 0px 10px;
+    font-size: 6rem;
+    flex-direction: column;
+}
+
+#main .txt {
+    font-size: 1.8rem;
+}
+
+@keyframes blink {
+    0% {
+        opacity: 0;
+    }
+
+    49% {
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+.blink {
+    animation-name: blink;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+}
+    </style>
 </head>
 
 <body>

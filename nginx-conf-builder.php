@@ -20,11 +20,7 @@ $status_codes_array = json_decode($status_codes_json, true);
 
 $conf_builder = <<<EOT
     ## Add custom error pages to NGINX
-
-    ## Common stylesheet
-    location = /http-error-pages.css {
-        root  /usr/local/share/http-error-pages/web;
-    }
+    ##
 
     EOT;
 

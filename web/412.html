@@ -7,7 +7,62 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>412 Precondition Failed</title>
     <meta name="description" content="The 412 (Precondition Failed) status code indicates that one or more conditions given in the request header fields evaluated to false when tested on the server (Section 13). This response status code allows the client to place preconditions on the current resource state (its current representations and metadata) and, thus, prevent the request method from being applied if the target resource is in an unexpected state.">
-    <link rel="stylesheet" href="http-error-pages.css">
+    <style>
+        @import url("https://fonts.googleapis.com/css?family=Press+Start+2P");
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+}
+
+* {
+    font-family: 'Press Start 2P', cursive;
+    box-sizing: border-box;
+}
+
+#main {
+    padding: 1rem;
+    background: black;
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    color: #54FE55;
+    text-shadow: 0px 0px 10px;
+    font-size: 6rem;
+    flex-direction: column;
+}
+
+#main .txt {
+    font-size: 1.8rem;
+}
+
+@keyframes blink {
+    0% {
+        opacity: 0;
+    }
+
+    49% {
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+.blink {
+    animation-name: blink;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+}
+    </style>
 </head>
 
 <body>
