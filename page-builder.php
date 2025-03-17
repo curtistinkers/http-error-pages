@@ -20,7 +20,7 @@ $status_codes_array = json_decode($status_codes_json, true);
 foreach ($status_codes_array as $http_status_category) {
     foreach ($http_status_category as $code => $message) {
         // Create the output filename
-        $output_file = 'web/error-' . $code . '.html';
+        $output_file = 'web/' . $code . '.html';
 
         // Display a message
         echo "$code: $message (file: $output_file) \n";
