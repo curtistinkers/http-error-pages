@@ -1,0 +1,8 @@
+{% set filename = "/error-#{ status_code }.html" %}
+
+## {{ status_code }}: {{ status_message }}
+error_page {{ status_code }} {{ filename }};
+location = {{ filename }} {
+    root  {{ location_root }};
+    internal;
+}
