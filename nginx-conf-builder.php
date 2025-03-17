@@ -22,7 +22,7 @@ $conf_builder = <<<EOT
     ## Add custom error pages to NGINX
 
     ## Common stylesheet
-    location = /css/http-error-pages.css {
+    location = /http-error-pages.css {
         root  /usr/local/share/http-error-pages/web;
     }
 
