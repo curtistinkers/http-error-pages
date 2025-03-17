@@ -1,0 +1,27 @@
+{
+    "name": "curtistinkers/http-error-pages",
+    "description": "Generate default error pages for your web server",
+    "type": "library",
+    "keywords": [ "twig", "error pages" ],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "curtistinkers",
+            "homepage": "https://curtistinkers.com",
+            "role": "Developer"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/curtistinkers/http-error-pages/issues",
+        "wiki": "https://github.com/curtistinkers/http-error-pages/wiki",
+        "source": "https://github.com/curtistinkers/http-error-pages"
+    },
+    "autoload": {
+        "psr-4": {
+            "Curtistinkers\\HttpErrorPages\\": "src/"
+        }
+    },
+    "require": {
+        "twig/twig": "^3.20"
+    }
+}
