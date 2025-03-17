@@ -18,7 +18,22 @@ $template = $twig->load('nginx-location.conf.twig');
 $status_codes_json = file_get_contents('status-codes.json');
 $status_codes_array = json_decode($status_codes_json, true);
 
-$conf_builder = "## Add custom error pages to NGINX\n";
+$conf_builder = <<<EOT
+    ## Add custom error pages to NGINX
+
+    ## Common stylesheet
+    location = /http-error-pages.css {
+        root  /usr/local/share/http-error-pages/web;
+        internal;
+    }
+
+    ## Common javascript
+    location = /http-error-pages.js {
+        root  /usr/local/share/http-error-pages/web;
+        internal;
+    }
+
+    EOT;
 
 foreach ($status_codes_array as $http_status_category) {
     foreach ($http_status_category as $code => $message) {
