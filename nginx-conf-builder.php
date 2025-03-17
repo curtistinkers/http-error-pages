@@ -18,7 +18,7 @@ $template = $twig->load('nginx-location.conf.twig');
 $status_codes_json = file_get_contents('status-codes.json');
 $status_codes_array = json_decode($status_codes_json, true);
 
-$conf_builder = null;
+$conf_builder = "## Add custom error pages to NGINX\n";
 
 foreach ($status_codes_array as $http_status_category) {
     foreach ($http_status_category as $code => $message) {
