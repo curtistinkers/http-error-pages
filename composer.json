@@ -22,6 +22,7 @@
         }
     },
     "require": {
-        "twig/twig": "^3.20"
+        "twig/twig": "^3.20",
+        "symfony/yaml": "^7.2"
     }
 }
