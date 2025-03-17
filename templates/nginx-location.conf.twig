@@ -1,8 +1,8 @@
-{% set filename = "/#{ status_code }.html" %}
+{% set filename = "/#{ code }.html" %}
 
-## {{ status_code }}: {{ status_message }}
-error_page {{ status_code }} {{ filename }};
+## {{ code }}: {{ reason }}
+error_page {{ code }} {{ filename }};
 location = {{ filename }} {
-    root  {{ location_root }};
+    root  {{ location }};
     internal;
 }

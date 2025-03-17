@@ -1,22 +1,21 @@
 <?php
 
-use Twig\Environment as Twig_Environment;
-use Twig\Loader\FilesystemLoader as Twig_Loader_Filesystem;
+namespace Curtistinkers\HttpErrorPages;
+
+use Symfony\Component\Yaml\Yaml;
+use Twig\Environment as TwigEnvironment;
+use Twig\Loader\FilesystemLoader as TwigLoaderFilesystem;
 
 require 'vendor/autoload.php';
 
 $location_root = '/usr/local/share/http-error-pages/web';
 
 // Set up Twig environment
-$loader = new Twig_Loader_Filesystem('templates');
-$twig = new Twig_Environment($loader);
+$loader = new TwigLoaderFilesystem('templates');
+$twig = new TwigEnvironment($loader);
 
 // Load the template
 $template = $twig->load('nginx-location.conf.twig');
-
-// Get HTTP status codes
-$status_codes_json = file_get_contents('status-codes.json');
-$status_codes_array = json_decode($status_codes_json, true);
 
 $conf_builder = <<<EOT
     ## Add custom error pages to NGINX
@@ -24,26 +23,45 @@ $conf_builder = <<<EOT
 
     EOT;
 
-foreach ($status_codes_array as $http_status_category) {
-    foreach ($http_status_category as $code => $message) {
+// Load YAML file into \ArrayIterator
+$http_status_codes = new \ArrayIterator(Yaml::parseFile('http-status-codes.yaml'));
 
-        // Prepare the data
-        $data = [
-            'status_code' => $code,
-            'status_message' => $message,
-            'location_root' => $location_root,
-        ];
+while ($http_status_codes->valid()) {
+    // Load $codes array into \ArrayIterator
+    $statuses = new \ArrayIterator($http_status_codes->current());
 
-        // Render the template
-        $content = $template->render($data);
+    while ($statuses->valid()) {
+        $enabled = $statuses->current()['enabled'];
 
-        $conf_builder .= $content;
+        // Set remaining variables if enabled
+        if ($enabled) {
+            $code = $statuses->key();
+            $reason = $statuses->current()['reason'];
+            $description = $statuses->current()['description'];
 
-        
+            $filename = 'web/' . $code . '.html';
+
+            // Display code and reason
+            // echo $code . ' => ' . $reason . "\n";
+
+            // Prepare the data for the template
+            $data = [
+                'code' => $code,
+                'reason' => $reason,
+                'location' => $location_root,
+            ];
+
+            // Render the template
+            $content = $template->render($data);
+
+            $conf_builder .= $content;
+        }
+        $statuses->next();
     }
+    $http_status_codes->next();
 }
 
-echo $conf_builder;
+// echo $conf_builder;
 
 // Write to a file
 file_put_contents('nginx-error-pages.conf', $conf_builder);
