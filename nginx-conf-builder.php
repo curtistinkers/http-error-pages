@@ -42,6 +42,6 @@ foreach ($status_codes_array as $http_status_category) {
 echo $conf_builder;
 
 // Write to a file
-file_put_contents('custom-error-pages.conf', $conf_builder);
+file_put_contents('nginx-error-pages.conf', $conf_builder);
 
 ?>
