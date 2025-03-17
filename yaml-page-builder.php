@@ -15,33 +15,42 @@ $twig = new TwigEnvironment($loader);
 // Load the template
 $template = $twig->load('error-page.html.twig');
 
-// Load YAML into array
-$http_status_codes = Yaml::parseFile('http-status-codes.yaml');
+// Load YAML file into \ArrayIterator
+$http_status_codes = new \ArrayIterator(Yaml::parseFile('http-status-codes.yaml'));
 
-// print_r($http_status_codes);
+while ($http_status_codes->valid()) {
+    // Load $codes array into \ArrayIterator
+    $statuses = new \ArrayIterator($http_status_codes->current());
 
-foreach ($http_status_codes as $category => $statuses) {
-    // print_r($statuses);
-    foreach ($statuses as $code => $detail) {
-        if ($detail['enabled']) {
-            // echo $detail['reason'];
-            // echo $detail['description'];
+    while ($statuses->valid()) {
+        $enabled = $statuses->current()['enabled'];
 
-            // Prepare the data
+        // Set remaining variables if enabled
+        if ($enabled) {
+            $code = $statuses->key();
+            $reason = $statuses->current()['reason'];
+            $description = $statuses->current()['description'];
+
+            $filename = 'web/' . $code . '.html';
+
+            // Display code and reason
+            // echo $code . ' => ' . $reason . "\n";
+
+            // Prepare the data for the template
             $data = [
                 'code' => $code,
-                'reason' => $detail['reason'],
-                'description' => $detail['description'],
+                'reason' => $reason,
+                'description' => $description,
             ];
 
-            // Render the template
+            // Render content
             $content = $template->render($data);
-
-            // echo $content;
-
-            file_put_contents("web/$code.html", $content);
+            
+            file_put_contents($filename, $content); 
         }
+        $statuses->next();
     }
+    $http_status_codes->next();
 }
 
 ?>
